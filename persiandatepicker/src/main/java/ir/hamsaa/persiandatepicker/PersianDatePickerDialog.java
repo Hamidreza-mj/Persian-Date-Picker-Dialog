@@ -228,7 +228,7 @@ public class PersianDatePickerDialog {
         return this;
     }
 
-    public PersianDatePickerDialog setBackgroundColor(@ColorInt int bgColor) {
+    private PersianDatePickerDialog setBackgroundColor(@ColorInt int bgColor) {
         this.backgroundColor = bgColor;
         return this;
     }
@@ -268,7 +268,8 @@ public class PersianDatePickerDialog {
         final AppCompatButton todayButton = v.findViewById(R.id.today_button);
         final LinearLayout container = v.findViewById(R.id.container);
 
-        container.setBackgroundColor(backgroundColor);
+        container.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.sheet));
+
         dateText.setTextColor(titleColor);
 
 
@@ -355,7 +356,7 @@ public class PersianDatePickerDialog {
 
         final AppCompatDialog dialog;
         if (showInBottomSheet) {
-            dialog = new BottomSheetDialog(context);
+            dialog = new BottomSheetDialog(context, R.style.DialogStyle);
             dialog.setContentView(v);
             dialog.setCancelable(cancelable);
         } else {

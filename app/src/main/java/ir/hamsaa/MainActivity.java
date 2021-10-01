@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 .setMaxYear(PersianDatePickerDialog.THIS_YEAR)
                 .setInitDate(initDate)
                 .setTypeFace(typeface)
-                .setBackgroundColor(Color.BLACK)
+//                .setBackgroundColor(Color.BLACK)
                 .setTitleColor(Color.WHITE)
                 .setActionTextColor(Color.RED)
                 .setPickerBackgroundDrawable(R.drawable.darkmode_bg)

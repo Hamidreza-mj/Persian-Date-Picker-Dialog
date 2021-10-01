@@ -5,8 +5,10 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/sheet"
     android:layoutDirection="ltr"
     android:orientation="vertical"
+    app:layout_behavior="@string/bottom_sheet_behavior"
     tools:ignore="RtlHardcoded,UnusedAttribute">
 
     <TextView
