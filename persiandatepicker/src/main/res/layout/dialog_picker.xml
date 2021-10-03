@@ -16,10 +16,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="40dp"
         android:gravity="center"
         android:textSize="16sp"
         tools:text="سه شنبه" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:id="@+id/txtNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@id/calendar"
+            android:fontFamily="@font/vazir_regular"
+            android:text="تاریخ هشدار را تنظیم کنید."
+            android:textColor="#757575"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText,TextContrastCheck" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/calendar"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@id/txtNotes"
+            android:layout_alignBottom="@id/txtNotes"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            android:tint="#757575"
+            app:srcCompat="@drawable/ic_calendar" />
+
+    </RelativeLayout>
 
     <ir.hamsaa.persiandatepicker.PersianDatePicker
         android:id="@+id/datePicker"
@@ -28,49 +59,127 @@
         android:theme="?attr/numberPickerTheme"
         app:displayMonthNames="true" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp">
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="10dp">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.33" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/positive_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/touchable_background"
-            android:padding="6dp"
-            android:textSize="12sp"
-            tools:text="ok" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/negative_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:background="@drawable/touchable_background"
-            android:padding="6dp"
-            android:textSize="12sp"
-            tools:text="cancel" />
-
-        <View
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/today_button"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/touchable_background"
-            android:padding="6dp"
-            android:textSize="12sp"
-            android:visibility="gone"
-            tools:text="today"
-            tools:visibility="visible" />
+            android:layout_marginHorizontal="5dp"
+            android:backgroundTint="#1F8EF3"
+            android:fontFamily="@font/vazir_medium"
+            android:gravity="center"
+            android:letterSpacing="0"
+            android:paddingVertical="10dp"
+            android:stateListAnimator="@null"
+            android:text="مرحله بعد"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="16sp"
+            android:theme="@style/Theme.MaterialComponents"
+            app:cornerRadius="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/today_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:rippleColor="#0C3860"
+            app:strokeWidth="0dp"
+            tools:ignore="HardcodedText,TextContrastCheck" />
 
-    </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/today_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:backgroundTint="#E2F1FF"
+            android:fontFamily="@font/vazir_medium"
+            android:gravity="center"
+            android:letterSpacing="0"
+            android:paddingVertical="10dp"
+            android:stateListAnimator="@null"
+            android:text="تاریخ امروز"
+            android:textAllCaps="false"
+            android:textColor="#1F8EF3"
+            android:textSize="16sp"
+            android:theme="@style/Theme.MaterialComponents"
+            app:cornerRadius="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/positive_button"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:rippleColor="#1F8EF3"
+            app:strokeWidth="0dp"
+            tools:ignore="HardcodedText,TextContrastCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/negative_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:backgroundTint="#fff"
+            android:fontFamily="@font/vazir_medium"
+            android:gravity="center"
+            android:letterSpacing="0"
+            android:paddingVertical="10dp"
+            android:stateListAnimator="@null"
+            android:text="انصراف"
+            android:textAllCaps="false"
+            android:textColor="#1F8EF3"
+            android:textSize="16sp"
+            android:theme="@style/Theme.MaterialComponents"
+            app:cornerRadius="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:rippleColor="#1F8EF3"
+            app:strokeWidth="0dp"
+            tools:ignore="HardcodedText,TextContrastCheck" />
+
+
+        <!--    <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/positive_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/touchable_background"
+                android:padding="6dp"
+                android:textSize="12sp"
+                tools:text="ok" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/negative_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:background="@drawable/touchable_background"
+                android:padding="6dp"
+                android:textSize="12sp"
+                tools:text="cancel" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/today_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/touchable_background"
+                android:padding="6dp"
+                android:textSize="12sp"
+                android:visibility="gone"
+                tools:text="today"
+                tools:visibility="visible" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

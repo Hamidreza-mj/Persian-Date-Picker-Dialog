@@ -18,6 +18,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.Date;
 
@@ -263,9 +264,9 @@ public class PersianDatePickerDialog {
         View v = View.inflate(context, R.layout.dialog_picker, null);
         final PersianDatePicker datePickerView = v.findViewById(R.id.datePicker);
         final TextView dateText = v.findViewById(R.id.dateText);
-        final AppCompatButton positiveButton = v.findViewById(R.id.positive_button);
-        final AppCompatButton negativeButton = v.findViewById(R.id.negative_button);
-        final AppCompatButton todayButton = v.findViewById(R.id.today_button);
+        final MaterialButton positiveButton = v.findViewById(R.id.positive_button);
+        final MaterialButton negativeButton = v.findViewById(R.id.negative_button);
+        final MaterialButton todayButton = v.findViewById(R.id.today_button);
         final LinearLayout container = v.findViewById(R.id.container);
 
         container.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.sheet));
@@ -332,9 +333,9 @@ public class PersianDatePickerDialog {
         negativeButton.setTextSize(negativeTextSize);
         todayButton.setTextSize(todayTextSize);
 
-        positiveButton.setTextColor(actionColor);
-        negativeButton.setTextColor(actionColor);
-        todayButton.setTextColor(actionColor);
+//        positiveButton.setTextColor(actionColor);
+//        negativeButton.setTextColor(actionColor);
+//        todayButton.setTextColor(actionColor);
 
         positiveButton.setText(positiveButtonString);
         negativeButton.setText(negativeButtonString);
