@@ -35,7 +35,7 @@
             android:layout_toStartOf="@id/calendar"
             android:layout_toEndOf="@id/aImgNotification"
             android:fontFamily="@font/vazir_regular"
-            android:minHeight="50dp"
+            android:minHeight="28dp"
             android:text="تاریخ هشدار را تنظیم کنید."
             android:textColor="#757575"
             android:textSize="14sp"
