@@ -428,7 +428,7 @@ public class PersianDatePickerDialog {
                 if (persianPickerListener != null) {
                     persianPickerListener.onDateSelected(datePickerView.getPersianDate(), isPassed);
                 }
-                dialog.dismiss();
+//                dialog.dismiss();
             }
         });
 
