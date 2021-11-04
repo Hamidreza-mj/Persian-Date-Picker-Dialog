@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
                 .setTypeFace(typeface)
                 .setTitleType(PersianDatePickerDialog.WEEKDAY_DAY_MONTH_YEAR)
                 .setShowInBottomSheet(true)
+                .setNotificationNoteClick(isPassed -> {
+                    Toast.makeText(this, isPassed ? "is passed" : "not passed!", Toast.LENGTH_SHORT).show();
+                })
                 .setListener(new PersianPickerListener() {
                     @Override
                     public void onDateSelected(PersianPickerDate persianPickerDate) {

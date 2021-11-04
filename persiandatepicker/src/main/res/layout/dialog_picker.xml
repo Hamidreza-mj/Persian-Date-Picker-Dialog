@@ -28,12 +28,14 @@
 
         <TextView
             android:id="@+id/txtNotes"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="5dp"
             android:layout_toStartOf="@id/calendar"
+            android:layout_toEndOf="@id/aImgNotification"
             android:fontFamily="@font/vazir_regular"
+            android:minHeight="50dp"
             android:text="تاریخ هشدار را تنظیم کنید."
             android:textColor="#757575"
             android:textSize="14sp"
@@ -44,11 +46,20 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_alignTop="@id/txtNotes"
-            android:layout_alignBottom="@id/txtNotes"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="20dp"
             android:tint="#757575"
             app:srcCompat="@drawable/ic_calendar" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/aImgNotification"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignTop="@id/txtNotes"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:tint="#757575"
+            app:srcCompat="@drawable/ic_outline_notification_off" />
 
     </RelativeLayout>
 

@@ -1,5 +1,6 @@
 package ir.hamsaa.persiandatepicker;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -14,7 +15,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialog;
-import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -22,6 +23,7 @@ import com.google.android.material.button.MaterialButton;
 
 import java.util.Date;
 
+import ir.hamsaa.persiandatepicker.api.NotificationNoteClick;
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate;
 import ir.hamsaa.persiandatepicker.api.PersianPickerListener;
 import ir.hamsaa.persiandatepicker.date.PersianDateImpl;
@@ -66,7 +68,13 @@ public class PersianDatePickerDialog {
     private int pickerBackgroundDrawable;
     private int titleType = 0;
     private boolean showInBottomSheet;
+    private ObjectAnimator rotateAnimator;
+    private AppCompatImageView imgNotification;
 
+    private boolean isAnimated = false;
+
+    private NotificationNoteClick notificationNoteClick;
+    private boolean isPassed;
 
     public PersianDatePickerDialog(Context context) {
         this.context = context;
@@ -83,6 +91,10 @@ public class PersianDatePickerDialog {
         return this;
     }
 
+    public PersianDatePickerDialog setNotificationNoteClick(NotificationNoteClick notificationNoteClick) {
+        this.notificationNoteClick = notificationNoteClick;
+        return this;
+    }
 
     public PersianDatePickerDialog setMaxYear(int maxYear) {
         this.maxYear = maxYear;
@@ -264,10 +276,24 @@ public class PersianDatePickerDialog {
         View v = View.inflate(context, R.layout.dialog_picker, null);
         final PersianDatePicker datePickerView = v.findViewById(R.id.datePicker);
         final TextView dateText = v.findViewById(R.id.dateText);
+        imgNotification = v.findViewById(R.id.aImgNotification);
         final MaterialButton positiveButton = v.findViewById(R.id.positive_button);
         final MaterialButton negativeButton = v.findViewById(R.id.negative_button);
         final MaterialButton todayButton = v.findViewById(R.id.today_button);
         final LinearLayout container = v.findViewById(R.id.container);
+
+        rotateAnimator = ObjectAnimator.ofFloat(
+                imgNotification,
+                "rotation",
+                0, 20, 0, -20, 0, 20, 0, -20, 0, 20, 0, -20, 0
+        );
+
+        rotateAnimator.setDuration(700);
+
+        imgNotification.setOnClickListener(view -> {
+            if (notificationNoteClick != null)
+                notificationNoteClick.onClick(isPassed);
+        });
 
         container.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.sheet));
 
@@ -357,7 +383,7 @@ public class PersianDatePickerDialog {
 
         final AppCompatDialog dialog;
         if (showInBottomSheet) {
-            dialog = new BottomSheetDialog(context, R.style.DialogStyle);
+            dialog = new BottomSheetDialog(context, R.style.AppBottomSheetDialogTheme);
             dialog.setContentView(v);
             dialog.setCancelable(cancelable);
         } else {
@@ -447,7 +473,54 @@ public class PersianDatePickerDialog {
                 break;
         }
 
+        handlePassedDate(persianDate);
     }
 
+    private void handlePassedDate(PersianPickerDate persianDate) {
+        PersianDateImpl currentDate = new PersianDateImpl();
+        currentDate.setDate(System.currentTimeMillis());
+
+        if (selectedDateIsPassed(currentDate, persianDate)) {
+            isAnimated = false;
+            isPassed = true;
+            imgNotification.setImageResource(R.drawable.ic_outline_notification_off);
+            imgNotification.setColorFilter(Color.parseColor("#757575"));
+            rotateAnimator.cancel();
+        } else {
+            isPassed = false;
+            imgNotification.setColorFilter(Color.parseColor("#1F8EF3"));
+            imgNotification.setImageResource(R.drawable.ic_outline_notification_active);
+
+            if (!isAnimated) {
+                isAnimated = true;
+                rotateAnimator.start();
+            }
+        }
+    }
+
+    private boolean selectedDateIsPassed(PersianPickerDate currentDate, PersianPickerDate selectedDate) {
+        int thisYear = currentDate.getPersianYear();
+        int thisMonth = currentDate.getPersianMonth();
+        int thisDay = currentDate.getPersianDay();
+
+        int selectedYear = selectedDate.getPersianYear();
+        int selectedMonth = selectedDate.getPersianMonth();
+        int selectedDay = selectedDate.getPersianDay();
+
+        if (selectedYear < thisYear) { //passed
+            return true;
+        } else if (selectedYear == thisYear) {
+
+            if (selectedMonth < thisMonth) //passed
+                return true;
+            else if (selectedMonth == thisMonth)
+                return selectedDay < thisDay; //true -> passed | false -> not passed
+            else //not passed
+                return false;
+
+        } else { //not passed
+            return false;
+        }
+    }
 
 }
