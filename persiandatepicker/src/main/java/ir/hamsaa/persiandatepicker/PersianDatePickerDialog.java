@@ -76,6 +76,8 @@ public class PersianDatePickerDialog {
     private NotificationNoteClick notificationNoteClick;
     private boolean isPassed;
 
+    private boolean enableBellView = false;
+
     public PersianDatePickerDialog(Context context) {
         this.context = context;
     }
@@ -271,8 +273,16 @@ public class PersianDatePickerDialog {
         return this;
     }
 
-    public void show() {
+    public PersianDatePickerDialog setEnableBellView(boolean enableBellView) {
+        this.enableBellView = enableBellView;
+        return this;
+    }
 
+    public boolean isEnableBellView() {
+        return enableBellView;
+    }
+
+    public void show() {
         View v = View.inflate(context, R.layout.dialog_picker, null);
         final PersianDatePicker datePickerView = v.findViewById(R.id.datePicker);
         final TextView dateText = v.findViewById(R.id.dateText);
@@ -282,13 +292,15 @@ public class PersianDatePickerDialog {
         final MaterialButton todayButton = v.findViewById(R.id.today_button);
         final LinearLayout container = v.findViewById(R.id.container);
 
-        rotateAnimator = ObjectAnimator.ofFloat(
-                imgNotification,
-                "rotation",
-                0, 20, 0, -20, 0, 20, 0, -20, 0, 20, 0, -20, 0
-        );
+        if (enableBellView) {
+            rotateAnimator = ObjectAnimator.ofFloat(
+                    imgNotification,
+                    "rotation",
+                    0, 20, 0, -20, 0, 20, 0, -20, 0, 20, 0, -20, 0
+            );
 
-        rotateAnimator.setDuration(700);
+            rotateAnimator.setDuration(700);
+        }
 
         imgNotification.setOnClickListener(view -> {
             if (notificationNoteClick != null)
@@ -299,6 +311,7 @@ public class PersianDatePickerDialog {
 
         dateText.setTextColor(titleColor);
 
+        imgNotification.setVisibility(enableBellView ? View.VISIBLE : View.GONE);
 
         if (pickerBackgroundColor != 0) {
             datePickerView.setBackgroundColor(pickerBackgroundColor);
@@ -413,7 +426,7 @@ public class PersianDatePickerDialog {
                 }
 
                 if (persianPickerListener != null) {
-                    persianPickerListener.onDateSelected(datePickerView.getPersianDate());
+                    persianPickerListener.onDateSelected(datePickerView.getPersianDate(), isPassed);
                 }
                 dialog.dismiss();
             }
@@ -480,22 +493,26 @@ public class PersianDatePickerDialog {
         PersianDateImpl currentDate = new PersianDateImpl();
         currentDate.setDate(System.currentTimeMillis());
 
-        if (selectedDateIsPassed(currentDate, persianDate)) {
-            isAnimated = false;
-            isPassed = true;
-            imgNotification.setImageResource(R.drawable.ic_outline_notification_off);
-            imgNotification.setColorFilter(Color.parseColor("#A1A1A1"));
-            imgNotification.setRotation(0);
-            rotateAnimator.cancel();
-        } else {
-            isPassed = false;
-            imgNotification.setColorFilter(Color.parseColor("#1F8EF3"));
-            imgNotification.setImageResource(R.drawable.ic_outline_notification_active);
+        if (enableBellView) {
+            if (selectedDateIsPassed(currentDate, persianDate)) {
+                isAnimated = false;
+                isPassed = true;
+                imgNotification.setImageResource(R.drawable.ic_outline_notification_off);
+                imgNotification.setColorFilter(Color.parseColor("#A1A1A1"));
+                imgNotification.setRotation(0);
+                rotateAnimator.cancel();
+            } else {
+                isPassed = false;
+                imgNotification.setColorFilter(Color.parseColor("#1F8EF3"));
+                imgNotification.setImageResource(R.drawable.ic_outline_notification_active);
 
-            if (!isAnimated) {
-                isAnimated = true;
-                rotateAnimator.start();
+                if (!isAnimated) {
+                    isAnimated = true;
+                    rotateAnimator.start();
+                }
             }
+        } else {
+            isPassed = selectedDateIsPassed(currentDate, persianDate);
         }
     }
 

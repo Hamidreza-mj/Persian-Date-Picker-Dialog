@@ -49,12 +49,17 @@ public class MainActivity extends AppCompatActivity {
                 .setTypeFace(typeface)
                 .setTitleType(PersianDatePickerDialog.WEEKDAY_DAY_MONTH_YEAR)
                 .setShowInBottomSheet(true)
+                .setEnableBellView(true)
                 .setNotificationNoteClick(isPassed -> {
                     Toast.makeText(this, isPassed ? "is passed" : "not passed!", Toast.LENGTH_SHORT).show();
                 })
                 .setListener(new PersianPickerListener() {
                     @Override
-                    public void onDateSelected(PersianPickerDate persianPickerDate) {
+                    public void onDateSelected(PersianPickerDate persianPickerDate, boolean isPassed) {
+                        if (isPassed) {
+                            Toast.makeText(MainActivity.this, "is passed", Toast.LENGTH_SHORT).show();
+                        }
+
                         Log.d(TAG, "onDateSelected: " + persianPickerDate.getTimestamp());//675930448000
                         Log.d(TAG, "onDateSelected: " + persianPickerDate.getGregorianDate());//Mon Jun 03 10:57:28 GMT+04:30 1991
                         Log.d(TAG, "onDateSelected: " + persianPickerDate.getPersianLongDate());// دوشنبه  13  خرداد  1370
