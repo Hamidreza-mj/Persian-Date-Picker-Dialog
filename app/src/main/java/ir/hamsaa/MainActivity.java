@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         Typeface typeface = Typeface.createFromAsset(getAssets(), "Shabnam-Light-FD.ttf");
 
-        picker = new PersianDatePickerDialog(this)
-                .setPositiveButtonString("باشه")
+        picker = new PersianDatePickerDialog(this);
+                picker.setPositiveButtonString("باشه")
                 .setNegativeButton("بیخیال")
                 .setTodayButton("امروز")
                 .setTodayButtonVisible(true)

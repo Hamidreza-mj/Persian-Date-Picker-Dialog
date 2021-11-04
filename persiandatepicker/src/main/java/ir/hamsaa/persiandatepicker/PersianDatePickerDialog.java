@@ -77,6 +77,7 @@ public class PersianDatePickerDialog {
     private boolean isPassed;
 
     private boolean enableBellView = false;
+    private AppCompatDialog dialog;
 
     public PersianDatePickerDialog(Context context) {
         this.context = context;
@@ -394,7 +395,6 @@ public class PersianDatePickerDialog {
         });
 
 
-        final AppCompatDialog dialog;
         if (showInBottomSheet) {
             dialog = new BottomSheetDialog(context, R.style.AppBottomSheetDialogTheme);
             dialog.setContentView(v);
@@ -539,6 +539,11 @@ public class PersianDatePickerDialog {
         } else { //not passed
             return false;
         }
+    }
+
+    public void dismiss() {
+        if (dialog != null)
+            dialog.dismiss();
     }
 
 }
