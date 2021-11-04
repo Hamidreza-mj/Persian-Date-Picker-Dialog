@@ -484,7 +484,8 @@ public class PersianDatePickerDialog {
             isAnimated = false;
             isPassed = true;
             imgNotification.setImageResource(R.drawable.ic_outline_notification_off);
-            imgNotification.setColorFilter(Color.parseColor("#757575"));
+            imgNotification.setColorFilter(Color.parseColor("#A1A1A1"));
+            imgNotification.setRotation(0);
             rotateAnimator.cancel();
         } else {
             isPassed = false;
