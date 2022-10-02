@@ -11,6 +11,11 @@
         <attr name="yearRange" format="integer" />
         <attr name="displayDescription" format="boolean" />
     </declare-styleable>
-    <attr name="numberPickerTheme" format="reference"/>
+    <attr name="numberPickerTheme" format="reference" />
+
+    <attr name="sheet_color" format="color|reference" />
+    <attr name="btn_today_color" format="color|reference" />
+    <attr name="desc_text_color" format="color|reference" />
+    <attr name="picker_text_color" format="color|reference" />
 
 </resources>

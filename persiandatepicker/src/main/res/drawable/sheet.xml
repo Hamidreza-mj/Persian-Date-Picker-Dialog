@@ -6,6 +6,6 @@
         android:topLeftRadius="35dp"
         android:topRightRadius="35dp" />
 
-    <solid android:color="#FFFFFF" />
+    <solid android:color="?attr/sheet_color" />
 
 </shape>

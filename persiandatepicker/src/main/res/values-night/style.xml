@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DialogDatePickerStyle">
+        <item name="sheet_color">#2A2F3C</item>
+        <item name="desc_text_color">#BFBFBF</item>
+        <item name="picker_text_color">#F8F8F8</item>
+        <item name="btn_today_color">#396B8097</item>
+    </style>
+</resources>

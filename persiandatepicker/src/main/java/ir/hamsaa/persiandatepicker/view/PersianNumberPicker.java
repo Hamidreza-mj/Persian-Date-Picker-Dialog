@@ -1,8 +1,10 @@
 package ir.hamsaa.persiandatepicker.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
+import ir.hamsaa.persiandatepicker.R;
 
 /**
  * Created by aliabdolahi on 1/23/17.
@@ -59,10 +62,20 @@ public class PersianNumberPicker extends NumberPicker {
 
     private void updateView(View view) {
         if (view instanceof TextView) {
-            if (PersianDatePickerDialog.typeFace != null)
-                ((TextView) view).setTypeface(PersianDatePickerDialog.typeFace);
+            if (PersianDatePickerDialog.typeFace != null) {
+                TextView textViewPicker = (TextView) view;
+                textViewPicker.setTypeface(PersianDatePickerDialog.typeFace);
+                textViewPicker.setTextColor(getColorFromAttr(getContext(), R.attr.picker_text_color));
+            }
         }
     }
 
+    private int getColorFromAttr(Context context, int attrResId) {
+        TypedValue typedValue = new TypedValue();
+        TypedArray a = context.obtainStyledAttributes(typedValue.data, new int[]{attrResId});
+        int color = a.getColor(0, 0);
+        a.recycle();
+        return color;
+    }
 
 }

@@ -22,5 +22,11 @@
         <item name="colorControlNormal">#5ECCCCCC</item>
     </style>
 
+    <style name="DialogDatePickerStyle">
+        <item name="sheet_color">#FFFFFF</item>
+        <item name="desc_text_color">#757575</item>
+        <item name="picker_text_color">#1B1B1B</item>
+        <item name="btn_today_color">#CFE8FF</item>
+    </style>
 
 </resources>
