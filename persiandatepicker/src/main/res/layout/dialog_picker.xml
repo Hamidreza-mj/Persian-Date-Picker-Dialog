@@ -37,7 +37,7 @@
             android:fontFamily="@font/vazir_regular"
             android:minHeight="28dp"
             android:text="تاریخ هشدار را تنظیم کنید."
-            android:textColor="#757575"
+            android:textColor="?attr/desc_text_color"
             android:textSize="14sp"
             tools:ignore="HardcodedText,TextContrastCheck" />
 
@@ -48,7 +48,7 @@
             android:layout_alignTop="@id/txtNotes"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"
-            android:tint="#757575"
+            android:tint="?attr/desc_text_color"
             app:srcCompat="@drawable/ic_calendar" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -58,7 +58,7 @@
             android:layout_alignTop="@id/txtNotes"
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
-            android:tint="#A1A1A1"
+            android:tint="?attr/desc_text_color"
             app:srcCompat="@drawable/ic_outline_notification_off" />
 
     </RelativeLayout>
